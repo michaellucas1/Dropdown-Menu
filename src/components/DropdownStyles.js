@@ -1,6 +1,8 @@
 export default class DropdownStyles {
     constructor(){
         this.style = document.createElement('style');
+        this.styleArray =[];
+        this.counter = 0;
         document.head.appendChild(this.style);
         const dropBtn = `
             .dropbtn {
@@ -11,19 +13,19 @@ export default class DropdownStyles {
                 border: none:
                 cursor: pointer  
             }`;
-        this.style.sheet.insertRule(dropBtn,0);
+        this.styleArray.push(dropBtn);
         const dropBtnHoverFocus = `
             .dropbtn:hover,
             .dropbtn:focus {
                 background-color: #2980B9;
             }`
-        this.style.sheet.insertRule(dropBtnHoverFocus,1);
+        this.styleArray.push(dropBtnHoverFocus);
         const dropDown = `
             .dropdown {
                 position: relative;
                 display: inline-block;
             }`;
-        this.style.sheet.insertRule(dropDown,2);
+        this.styleArray.push(dropDown);
         const dropDownContent = `
             .dropdown-content {
                 display: none;
@@ -33,7 +35,7 @@ export default class DropdownStyles {
                 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
                 z-index: 1;
             }`;
-        this.style.sheet.insertRule(dropDownContent,3);
+        this.styleArray.push(dropDownContent);
         const dropDownContentA = `
             .dropdown-content a {
                 color: black;
@@ -41,17 +43,31 @@ export default class DropdownStyles {
                 text-decoration: none;
                 display: block;
             }`;
-        this.style.sheet.insertRule(dropDownContentA,4);
+        this.styleArray.push(dropDownContentA);
         const dropDownContentAHover = `
             .dropdown-content a:hover {
                 background-color: #ddd;
             }`;
-        this.style.sheet.insertRule(dropDownContentAHover,5);
+        this.styleArray.push(dropDownContentAHover);
         const show = `
             .show {
                 display: block;
             }`;
-        this.style.sheet.insertRule(show,6);
-        console.log(this.style.sheet);
+        this.styleArray.push(show);
+        this.styleArray.forEach((rule)=>{
+            this.style.sheet.insertRule(rule,this.counter)
+            this.counter +=1;
+        });
+    }
+    showRule(location){
+        if(location <= this.styleArray.length && location >= 0){
+            console.log(this.styleArray[location]);
+            return;
+        }
+        let rules='';
+        this.styleArray.forEach((rule)=>{
+            rules += rule;
+        });
+        console.log(rules);
     }
 }
