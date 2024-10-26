@@ -3,19 +3,29 @@ import "./styles/css-reset.css";
 import "./styles/modern-normalize.css";
 import DropdownStyles from './components/DropdownStyles';
 import Dropdown from './components/Dropdown';
-console.log("Hello World");
+import WindowListener from './components/WindowListener';
 
 const dropDown = new Dropdown();
-new DropdownStyles();
+const dropDownStyle = new DropdownStyles();
+new WindowListener();
 dropDown.addContent({
-    link:'www.google.com',
+    link:'#home',
     text:'first',
 });
 dropDown.addContent({
-    link:'www.google.com',
+    link:'#safe',
     text:'second',
 });
 dropDown.addContent({
-    link:'www.google.com',
+    //link:'#contact',
     text:'third',
 });
+const dropDownTwo = new Dropdown();
+dropDownTwo.addContent({
+    link:'#hoome',
+    text:'home',
+})
+dropDown.appendDropdownTo('body');
+dropDownTwo.appendDropdownTo('body');
+dropDown.removeDropdownFrom('body');
+dropDownStyle.showRule(0);
